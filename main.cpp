@@ -1,7 +1,9 @@
 // Winter'22
 // Instructor: Diba Mirza
-// Student name: 
-#include <iostream>
+// Student name: Lizette Crooks
+// perm #4087193
+// 3/2/22
+
 #include <fstream>
 #include <string>
 #include <ctime>
@@ -12,9 +14,11 @@
 #include <iomanip>
 #include <set>
 #include <queue>
+
+#include <iostream>
 using namespace std;
 
-
+#include "movies.h"
 
 bool parseLine(string &line, string &movieName, double &movieRating);
 
