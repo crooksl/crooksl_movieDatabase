@@ -81,24 +81,52 @@ if(argc == 2){
   return 0;
 }
 
+string bestMovie = "";
+
 if (argc > 2) {
 
-  set<Movie>::iterator it;
+  priority_queue<Movie, vector<Movie>, myFunctor> pq;
 
-  int numPrefix = argc - 2;
-  while (numPrefix > 0) {
-    // write code for prefix here
+  int numPrefix = argc;
+  int currPrefix = 2;
 
-    // argv[numPrefix + 2];
-    // mList.find();
+  while (currPrefix != numPrefix) {
+    
+    set<Movie>::iterator current;
+    current = mList.begin();
+    set<Movie>::iterator lEnd;
+    lEnd = mList.end();
 
-    for(auto inMovie: mList) {
-      if (mList.inMovie.find(argv[numPrefix + 2])) {
+    Movie maxMovie {" ", 0.0};
 
+    int length = strlen(argv[currPrefix]);
+
+    while (!(current == lEnd)) {
+      if (current->getMovie().substr(0, length) == argv[currPrefix]) {
+        if (current->getScore() > maxMovie.getScore()) {
+          maxMovie.setMovie(current->getMovie());
+          maxMovie.setScore(current->getScore());
+        }
+        pq.push(*current);
       }
+      current++;
     }
 
-    numPrefix--;
+    if (pq.empty()) {
+      cout << "No movies found with prefix " << argv[currPrefix] << endl << endl;
+    }
+    if (!pq.empty()) {
+      bestMovie = bestMovie + "Best movie with prefix " + argv[currPrefix] + " is: " + maxMovie.getMovie() + " with rating " + to_string(maxMovie.getScore()).substr(0, 3) + "\n";
+    }
+
+    while(!pq.empty()){
+        cout << pq.top().getMovie() << ", " << pq.top().getScore() << endl;
+        pq.pop();
+    }
+
+    cout << endl;
+
+    currPrefix++;
   }
 
 }
@@ -106,13 +134,13 @@ if (argc > 2) {
 //  For each prefix,
 //  Find all movies that have that prefix and store them in an appropriate data structure
 //  If no movie with that prefix exists print the following message
-cout<<"No movies found with prefix "<<"<replace with prefix>"<<endl<<endl;
+// cout<<"No movies found with prefix "<<"<replace with prefix>"<<endl<<endl;
 
 //  For each prefix,
 //  Print the highest rated movie with that prefix if it exists.
-cout << "Best movie with prefix "<<"<replace with prefix>"<<" is: " << "replace with moview name" <<" with rating " << std::fixed << std::setprecision(1) << "replace with movie rating"<< endl;
+//  cout << "Best movie with prefix "<<"<replace with prefix>"<<" is: " << "replace with moview name" <<" with rating " << std::fixed << std::setprecision(1) << "replace with movie rating"<< endl;
     
-
+cout << bestMovie << endl;
 
 return 0;
 }

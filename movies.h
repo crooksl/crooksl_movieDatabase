@@ -34,5 +34,17 @@ class Movie {
         double score;
 };
 
+class myFunctor{
+    public:
+        bool operator()(Movie a, Movie b){
+            if (a.getScore() == b.getScore()) {
+                return a.getMovie() > b.getMovie();
+            }
+            else {
+                return a.getScore() < b.getScore();
+            }
+        }
+};
+
 
 #endif
