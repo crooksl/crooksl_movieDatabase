@@ -113,7 +113,7 @@ if (argc > 2) {
     }
 
     if (pq.empty()) {
-      cout << "No movies found with prefix " << argv[currPrefix] << endl << endl;
+      cout << "No movies found with prefix " << argv[currPrefix];
     }
     if (!pq.empty()) {
       bestMovie = bestMovie + "Best movie with prefix " + argv[currPrefix] + " is: " + maxMovie.getMovie() + " with rating " + to_string(maxMovie.getScore()).substr(0, 3) + "\n";
@@ -140,7 +140,7 @@ if (argc > 2) {
 //  Print the highest rated movie with that prefix if it exists.
 //  cout << "Best movie with prefix "<<"<replace with prefix>"<<" is: " << "replace with moview name" <<" with rating " << std::fixed << std::setprecision(1) << "replace with movie rating"<< endl;
     
-cout << bestMovie << endl;
+cout << bestMovie;
 
 return 0;
 }
