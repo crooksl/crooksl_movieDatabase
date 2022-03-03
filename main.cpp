@@ -120,7 +120,7 @@ if (argc > 2) {
     }
 
     while(!pq.empty()){
-        cout << pq.top().getMovie() << ", " << pq.top().getScore() << endl;
+        cout << pq.top().getMovie() << ", " << fixed << setprecision(1) << pq.top().getScore() << endl;
         pq.pop();
     }
 
