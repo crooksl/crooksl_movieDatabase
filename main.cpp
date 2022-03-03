@@ -4,6 +4,14 @@
 // perm #4087193
 // 3/2/22
 
+/* TODO:
+  1. create set 
+  2. read in file and store in set
+  3. print correctly
+*/
+
+// lecture code about set: https://github.com/ucsb-cs24-w22/cs24-w22-lectures/tree/main/lect15
+
 #include <fstream>
 #include <string>
 #include <ctime>
@@ -38,7 +46,9 @@ int main(int argc, char** argv){
     exit(1);
   }
   
-//Create an object of a STL data-structure to store all the movies
+//Create an object of a STL data-structure to store all the movies - using set :)
+set<Movie> mList;
+Movie inMovie;
 
 string line, movieName;
 double movieRating;
@@ -48,12 +58,22 @@ while (getline (movieFile, line) && parseLine(line, movieName, movieRating)){
   // to construct your Movie objects
   // cout << movieName << " has rating " << movieRating << endl;
   // insert elements into your data structure
+
+  inMovie.setMovie(movieName);
+  inMovie.setScore(movieRating);
+  // cout << inMovie.getMovie() << " " << inMovie.getScore() << endl;
+  mList.insert(inMovie);
+
 }
 
 movieFile.close();
 
 if(argc == 2){
   //print all the movies in ascending alphabetical order of movie names
+  for(auto inMovie: mList){
+    cout << inMovie.getMovie() << " " << inMovie.getScore() << endl;
+  }
+
   return 0;
 }
 

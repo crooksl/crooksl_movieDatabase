@@ -15,7 +15,7 @@ string Movie::getMovie() const {
     return movie;
 }
 
-int Movie::getScore() const {
+double Movie::getScore() const {
     return score;
 }
 
@@ -24,6 +24,35 @@ void Movie::setMovie(string newMovie) {
     movie = newMovie;
 }
 
-void Movie::setScore(int newScore) {
+void Movie::setScore(double newScore) {
     score = newScore;
 }
+
+// overloaded operators
+bool operator==(const Movie& m1, const Movie& m2) {
+    if (m1.getMovie() == m2.getMovie() && m1.getScore() == m2.getScore()) {
+        return true;
+    }
+    else {
+        return false;
+    }
+}
+
+bool operator<(const Movie& m1, const Movie& m2) {
+    if (m1.getMovie() < m2.getMovie()) {
+        return true;
+    }
+    else {
+        return false;
+    }
+}
+
+bool operator>(const Movie& m1, const Movie& m2) {
+    if (m1.getMovie() > m2.getMovie()) {
+        return true;
+    }
+    else {
+        return false;
+    }
+}
+

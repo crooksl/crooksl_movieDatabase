@@ -16,16 +16,22 @@ using namespace std;
 
 class Movie {
     public:
-        Movie(string mv = "", int sc = 0): movie(mv), score(sc) {}
+        Movie(string mv = "", double sc = 0.0): movie(mv), score(sc) {}
         ~Movie();
+
         string getMovie() const;
-        int getScore() const;
-        void setMovie(string newSuit);
-        void setScore(int newNumber);
+        double getScore() const;
+
+        void setMovie(string newMovie);
+        void setScore(double newScore);
+
+        bool friend operator==(const Movie& m1, const Movie& m2);
+        bool friend operator<(const Movie& m1, const Movie& m2);
+        bool friend operator>(const Movie& m1, const Movie& m2);
         
     private:
         string movie;
-        int score;
+        double score;
 };
 
 
