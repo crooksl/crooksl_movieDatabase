@@ -116,7 +116,12 @@ if (argc > 2) {
       cout << "No movies found with prefix " << argv[currPrefix] << endl;
     }
     if (!pq.empty()) {
-      bestMovie = bestMovie + "Best movie with prefix " + argv[currPrefix] + " is: " + maxMovie.getMovie() + " with rating " + to_string(maxMovie.getScore()).substr(0, 3) + "\n";
+      if (maxMovie.getScore() == 10) {
+        bestMovie = bestMovie + "Best movie with prefix " + argv[currPrefix] + " is: " + maxMovie.getMovie() + " with rating " + to_string(maxMovie.getScore()).substr(0, 4) + "\n";
+      }
+      else {
+        bestMovie = bestMovie + "Best movie with prefix " + argv[currPrefix] + " is: " + maxMovie.getMovie() + " with rating " + to_string(maxMovie.getScore()).substr(0, 3) + "\n";
+      }
     }
 
     while(!pq.empty()){
