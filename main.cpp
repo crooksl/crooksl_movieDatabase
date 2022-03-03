@@ -71,7 +71,8 @@ movieFile.close();
 if(argc == 2){
   //print all the movies in ascending alphabetical order of movie names
   for(auto inMovie: mList){
-    cout << inMovie.getMovie() << " " << inMovie.getScore() << endl;
+    cout.precision(1);
+    cout << inMovie.getMovie() << " " << fixed << inMovie.getScore() << endl;
   }
 
   return 0;
