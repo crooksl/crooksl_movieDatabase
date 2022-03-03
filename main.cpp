@@ -5,12 +5,20 @@
 // 3/2/22
 
 /* TODO:
-  1. create set 
-  2. read in file and store in set
+Part 1:
+  1. create set ✓
+  2. read in file and store in set ✓
+  3. print correctly ✓
+Part 2:
+  1. create max-heap priority queue
+  2. take in prefix and add to heap
   3. print correctly
+Part 3:
+  1. big-o analysis
 */
 
 // lecture code about set: https://github.com/ucsb-cs24-w22/cs24-w22-lectures/tree/main/lect15
+// lecture code about heap: https://github.com/ucsb-cs24-w22/cs24-w22-lectures/blob/main/lect16/pq.cpp
 
 #include <fstream>
 #include <string>
@@ -37,16 +45,14 @@ int main(int argc, char** argv){
     exit(1);
   }
 
-
   ifstream movieFile (argv[1]);
- 
 
   if (movieFile.fail()){
     cerr << "Could not open file " << argv[1];
     exit(1);
   }
   
-//Create an object of a STL data-structure to store all the movies - using set :)
+// using set
 set<Movie> mList;
 Movie inMovie;
 
@@ -54,14 +60,11 @@ string line, movieName;
 double movieRating;
 // Read each file and store the name and rating
 while (getline (movieFile, line) && parseLine(line, movieName, movieRating)){
-  // Use std::string movieName and double movieRating
-  // to construct your Movie objects
-  // cout << movieName << " has rating " << movieRating << endl;
-  // insert elements into your data structure
+  // string movieName and double movieRating
 
   inMovie.setMovie(movieName);
   inMovie.setScore(movieRating);
-  // cout << inMovie.getMovie() << " " << inMovie.getScore() << endl;
+  
   mList.insert(inMovie);
 
 }
@@ -78,6 +81,27 @@ if(argc == 2){
   return 0;
 }
 
+if (argc > 2) {
+
+  set<Movie>::iterator it;
+
+  int numPrefix = argc - 2;
+  while (numPrefix > 0) {
+    // write code for prefix here
+
+    // argv[numPrefix + 2];
+    // mList.find();
+
+    for(auto inMovie: mList) {
+      if (mList.inMovie.find(argv[numPrefix + 2])) {
+
+      }
+    }
+
+    numPrefix--;
+  }
+
+}
 
 //  For each prefix,
 //  Find all movies that have that prefix and store them in an appropriate data structure
