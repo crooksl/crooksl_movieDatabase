@@ -10,9 +10,9 @@ Part 1:
   2. read in file and store in set ✓
   3. print correctly ✓
 Part 2:
-  1. create max-heap priority queue
-  2. take in prefix and add to heap
-  3. print correctly
+  1. create max-heap priority queue ✓
+  2. take in prefix and add to heap ✓
+  3. print correctly ✓
 Part 3:
   1. big-o analysis
 */
@@ -52,6 +52,7 @@ int main(int argc, char** argv){
     exit(1);
   }
   
+// PART 1
 // using set
 set<Movie> mList;
 Movie inMovie;
@@ -81,6 +82,8 @@ if(argc == 2){
   return 0;
 }
 
+
+//PART 2
 string bestMovie = "";
 
 if (argc > 2) {
@@ -90,7 +93,8 @@ if (argc > 2) {
   int numPrefix = argc;
   int currPrefix = 2;
 
-  while (currPrefix != numPrefix) {
+  // overall m*( O(n*log(k)) + O(k*log(k) ) --> O(m*n*log(k) + m*k*log(k))
+  while (currPrefix != numPrefix) {   // loop runs m times for # of prefixes
     
     set<Movie>::iterator current;
     current = mList.begin();
@@ -101,13 +105,14 @@ if (argc > 2) {
 
     int length = strlen(argv[currPrefix]);
 
-    while (!(current == lEnd)) {
+    // overall, O(n*log(k))
+    while (!(current == lEnd)) {    // O(n) - runs n times for # of movies in set
       if (current->getMovie().substr(0, length) == argv[currPrefix]) {
         if (current->getScore() > maxMovie.getScore()) {
           maxMovie.setMovie(current->getMovie());
           maxMovie.setScore(current->getScore());
         }
-        pq.push(*current);
+        pq.push(*current);    // O(log(k)) - priority queue push for a matching movie to prefix
       }
       current++;
     }
@@ -115,6 +120,7 @@ if (argc > 2) {
     if (pq.empty()) {
       cout << "No movies found with prefix " << argv[currPrefix] << endl;
     }
+
     if (!pq.empty()) {
       if (maxMovie.getScore() == 10) {
         bestMovie = bestMovie + "Best movie with prefix " + argv[currPrefix] + " is: " + maxMovie.getMovie() + " with rating " + to_string(maxMovie.getScore()).substr(0, 4) + "\n";
@@ -124,9 +130,10 @@ if (argc > 2) {
       }
     }
 
-    while(!pq.empty()){
+    // overall, O(k*log(k))
+    while(!pq.empty()){ // loop runs k times until empty
         cout << pq.top().getMovie() << ", " << fixed << setprecision(1) << pq.top().getScore() << endl;
-        pq.pop();
+        pq.pop();   // O(log(k)) - priority queue pop 
     }
 
     cout << endl;
@@ -135,22 +142,34 @@ if (argc > 2) {
   }
 
 }
-
-//  For each prefix,
-//  Find all movies that have that prefix and store them in an appropriate data structure
-//  If no movie with that prefix exists print the following message
-// cout<<"No movies found with prefix "<<"<replace with prefix>"<<endl<<endl;
-
-//  For each prefix,
-//  Print the highest rated movie with that prefix if it exists.
-//  cout << "Best movie with prefix "<<"<replace with prefix>"<<" is: " << "replace with moview name" <<" with rating " << std::fixed << std::setprecision(1) << "replace with movie rating"<< endl;
     
 cout << bestMovie;
 
 return 0;
+
 }
 
-/* Add your run time analysis for part 3 of the assignment here as commented block*/
+
+// PART 3
+/* 
+note: ignoring O(1) work
+
+The overarching while loop, while(currPrefix != numPrefix), runs m times for # of prefixes
+Within it, there are two other while loops:
+  -loop 1, while(!(current == lEnd))
+    the loop runs n times for # of movies in set
+    does a push into a pq when match exists, O(log(k)), where k is # of successful matches
+    so overall running time for loop 1 is O(n*log(k))
+      -note: worst case we run loop n times and there are n matches
+  -loop 2, while(!pq.empty())
+    loop runs k times until empty
+    does a pop from pq, O(log(k))
+    so overall running time for loop 2 is O(k*log(k))
+So the overall running time for part 2 is m*( O(n*log(k)) + O(k*log(k) )
+--> O( m*n*log(k) + m*k*log(k) )
+
+*/
+
 
 
 
