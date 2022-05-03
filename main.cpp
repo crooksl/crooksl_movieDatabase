@@ -93,7 +93,7 @@ if (argc > 2) {
   int numPrefix = argc;
   int currPrefix = 2;
 
-  // overall m*( O(n*log(k)) + O(k*log(k) ) --> O(m*n*log(k) + m*k*log(k))
+  // overall m*( O(n + k*log(k)) + O(k*log(k) ) --> O(m*(n + 2klog(k)) --> O(m*n + m*k*log(k))
   while (currPrefix != numPrefix) {   // loop runs m times for # of prefixes
     
     set<Movie>::iterator current;
@@ -105,14 +105,14 @@ if (argc > 2) {
 
     int length = strlen(argv[currPrefix]);
 
-    // overall, O(n*log(k))
+    // overall, O(n + k*log(k))
     while (!(current == lEnd)) {    // O(n) - runs n times for # of movies in set
       if (current->getMovie().substr(0, length) == argv[currPrefix]) {
         if (current->getScore() > maxMovie.getScore()) {
           maxMovie.setMovie(current->getMovie());
           maxMovie.setScore(current->getScore());
         }
-        pq.push(*current);    // O(log(k)) - priority queue push for a matching movie to prefix
+        pq.push(*current);    // O(k*log(k)) - priority queue push for a matching movie to prefix, occurs k times
       }
       current++;
     }
@@ -159,14 +159,16 @@ Within it, there are two other while loops:
   -loop 1, while(!(current == lEnd))
     the loop runs n times for # of movies in set
     does a push into a pq when match exists, O(log(k)), where k is # of successful matches
-    so overall running time for loop 1 is O(n*log(k))
+      - it does this k times so, O(k*log(k))
+    so overall running time for loop 1 is O(n + k*log(k))
       -note: worst case we run loop n times and there are n matches
   -loop 2, while(!pq.empty())
     loop runs k times until empty
     does a pop from pq, O(log(k))
     so overall running time for loop 2 is O(k*log(k))
-So the overall running time for part 2 is m*( O(n*log(k)) + O(k*log(k) )
---> O( m*n*log(k) + m*k*log(k) )
+So the overall running time for part 2 is m*( O(n + k*log(k)) + O(k*log(k) ) 
+--> O(m*(n + 2*k*log(k)) 
+--> O(m*(n + k*log(k))
 
 */
 
