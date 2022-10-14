@@ -1,7 +1,4 @@
-// Winter'22
-// Instructor: Diba Mirza
-// Student name: Lizette Crooks
-// perm #4087193
+// Lizette Crooks
 // 3/2/22
 
 /* TODO:
@@ -16,9 +13,6 @@ Part 2:
 Part 3:
   1. big-o analysis
 */
-
-// lecture code about set: https://github.com/ucsb-cs24-w22/cs24-w22-lectures/tree/main/lect15
-// lecture code about heap: https://github.com/ucsb-cs24-w22/cs24-w22-lectures/blob/main/lect16/pq.cpp
 
 #include <fstream>
 #include <string>
@@ -59,7 +53,7 @@ Movie inMovie;
 
 string line, movieName;
 double movieRating;
-// Read each file and store the name and rating
+// read each file and store the name and rating
 while (getline (movieFile, line) && parseLine(line, movieName, movieRating)){
   // string movieName and double movieRating
 
